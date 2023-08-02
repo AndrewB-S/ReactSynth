@@ -1,27 +1,13 @@
-# React + TypeScript + Vite
+This keyboard is built using react + typescript + tone.js using vite as the build tool. I may rebuild this with next.js when I implement CRUD functionality with planned feature updates. 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The novel element is the keyboard generation. My intention is for this to be a keyboard made for mobile users to customize to fit their preference on their screen. They can choose the number of notes to display, they can choose the starting note, they can choose the octave we start on, and later I will be implementing full synth controls. 
 
-Currently, two official plugins are available:
+Currently, I can't find any other keyboard online that generates keys this way, but while I think the challenge to reproduce a piano keyboard with code is difficult, I don't think it's extremely difficult if you're able to follow design documents from a real piano manufacturer, which is what I was able to do thanks to the page at http://www.quadibloc.com/other/cnv05.htm. I did the math and converted his measurements into ratios, and was able to handle the edge cases of starting on notes like A, where missing the partial size of the Ab makes the pattern of the black keys off. As a result, I believe I'm making the most playable mobile piano keyboard around right now, which is funny to type, because at the moment I still have to change the direction of the keyboard on mobile devices to landscape.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+I will be working further to clean up performance in generation, since currently adding notes causes a rerender of the entire keyboard component (hopefully usememo will fix this), and I will be continuing to add features as development continues. 
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Planned features: 
+Parameters to adjust the synthesizer.
+Presets of those parameters, including saving and sharing presets.
+Uploading and sampling audio
+Potentially a port to react native. 
