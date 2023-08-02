@@ -1,0 +1,221 @@
+#root {
+  margin: 0;
+  text-align: center;
+  height: 100vh;
+}
+
+.keyboard-controls-wrapper,
+.keyboard-controls-wrapper > div {
+  display: flex;
+}
+
+.keyboard-controls-wrapper {
+  max-height: 50px;
+  color: black;
+}
+
+.keyboardContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: flex-start;
+  --keyboard-min-height: 200px;
+  --keyboard-preferred-height: 600px;
+  --keyboard-max-height: 700px;
+}
+
+.whiteKeyContainer {
+  display: flex;
+  height: clamp(
+    var(--keyboard-min-height),
+    var(--keyboard-preferred-height),
+    var(--keyboard-max-height)
+  );
+  width: 100%;
+
+  & .c {
+    flex-grow: 0.9583;
+  }
+
+  & .d {
+    flex-grow: 1;
+  }
+
+  & .e {
+    flex-grow: 0.9583;
+  }
+
+  & .f {
+    flex-grow: 1;
+  }
+
+  & .g {
+    flex-grow: 0.9583;
+  }
+
+  & .a {
+    flex-grow: 0.9583;
+  }
+
+  & .b {
+    flex-grow: 1;
+  }
+}
+
+.blackKeyContainer * {
+  height: 0;
+}
+
+.blackKeyContainer {
+  display: flex;
+  position: absolute;
+  height: 0;
+  z-index: 3;
+  width: 100%;
+  justify-content: center;
+
+  & .c {
+    flex-grow: 1;
+  }
+
+  & .db {
+    flex-grow: 1;
+  }
+
+  & .d {
+    flex-grow: 1;
+  }
+
+  & .eb {
+    flex-grow: 1;
+  }
+
+  & .e {
+    flex-grow: 1;
+  }
+
+  & .f {
+    flex-grow: 0.9286;
+  }
+
+  & .gb {
+    flex-grow: 1;
+  }
+
+  & .g {
+    flex-grow: 0.9286;
+  }
+
+  & .ab {
+    flex-grow: 1;
+  }
+
+  & .a {
+    flex-grow: 0.9286;
+  }
+
+  & .bb {
+    flex-grow: 1;
+  }
+
+  & .b {
+    flex-grow: 0.9286;
+  }
+}
+
+.whiteKey {
+  background-color: white;
+  border: 1px solid black;
+}
+
+.blackKey {
+  background-color: black;
+  height: clamp(
+    calc(var(--keyboard-min-height) / 2),
+    calc(var(--keyboard-preferred-height) / 2),
+    calc(var(--keyboard-max-height) / 2)
+  );
+}
+
+/* Micro adjustments for the black key container*/
+
+.startsWithD {
+  flex-grow: 1.35714 !important;
+}
+
+.startsWithE {
+  flex-grow: 1.6429 !important;
+}
+
+.startsWithG {
+  flex-grow: 1.0833 !important;
+}
+
+.startsWithA {
+  flex-grow: 1.4286 !important;
+}
+
+.startsWithB {
+  flex-grow: 1.7143 !important;
+}
+
+.endsWithC {
+  flex-grow: 1.6429 !important;
+}
+
+.endsWithD {
+  flex-grow: 1.3571 !important;
+}
+
+.endsWithF {
+  flex-grow: 1.7143 !important;
+}
+
+.endsWithG {
+  flex-grow: 1.4286 !important;
+}
+
+.endsWithA {
+  flex-grow: 1.1429 !important;
+}
+
+/* Micro adjustments for the white key container */
+
+.endsWithDb {
+  flex-grow: 0.2083 !important;
+  background-color: grey;
+}
+.endsWithEb {
+  flex-grow: 0.3913 !important;
+  background-color: grey;
+}
+.endsWithGb {
+  flex-grow: 0.2083 !important;
+  background-color: grey;
+}
+.endsWithAb {
+  flex-grow: 0.3043 !important;
+  background-color: grey;
+}
+.endsWithBb {
+  flex-grow: 0.4583 !important;
+  background-color: grey;
+}
+
+@media (max-width: 680px) {
+  .keyboardContainer {
+    flex-direction: column-reverse;
+  }
+
+  .whiteKeyContainer {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .blackKeyContainer {
+    flex-direction: column;
+    height: 100%;
+    width: 50vw;
+    left: 50%;
+  }
+}
