@@ -1,3 +1,4 @@
+import { PolySynth } from "tone";
 import Key from "./Key";
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
 }
 
 const Keyboard = ({ keyBasis, startingNote, initialOctave }: Props) => {
+  const synth = new PolySynth().toDestination();
   //Used for generating keyboard
   //todo: move key generation into its own function, call that function when the user changes the props interfaced to them
   const keyMap: any = { a: 0, b: 2, c: 3, d: 5, e: 7, f: 8, g: 10 };
@@ -31,8 +33,6 @@ const Keyboard = ({ keyBasis, startingNote, initialOctave }: Props) => {
     }
     return octave;
   };
-  //End of keyboard generation logic
-  //------------------------------------------------------------------------------------------
 
   const keyArray = (segment: string) => {
     octave = initialOctave;
@@ -40,20 +40,26 @@ const Keyboard = ({ keyBasis, startingNote, initialOctave }: Props) => {
       .fill("")
       .map((_, index, noteArray) => {
         let currentNote = keysList[(index + keyMap[startingNote]) % 12];
+        let octave = assignNote(currentNote, index);
 
         return (
           <Key
             key={index}
             noteId={index}
-            octave={assignNote(currentNote, index)}
             note={currentNote}
             segment={segment}
             lastKey={index === noteArray.length - 1}
             firstKey={index === 0}
+            handleClick={() =>
+              synth.triggerAttackRelease(currentNote + octave, "8n")
+            }
           ></Key>
         );
       });
   };
+
+  //End of keyboard generation logic
+  //------------------------------------------------------------------------------------------
 
   return (
     <>

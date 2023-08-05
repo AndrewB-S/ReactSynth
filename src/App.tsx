@@ -8,65 +8,43 @@ function App() {
   const [keyBasis, setKeyBasis] = useState(40);
   const [startingNote, setStartingNote] = useState("c");
   const [octave, setOctave] = useState(1);
-  var allowedStartingNotes = ["c", "d", "e", "f", "g", "a", "b"];
+  const allowedStartingNotes = ["c", "d", "e", "f", "g", "a", "b"];
 
-  const handleIncrease = (stateSelection: string) => {
-    if (stateSelection === "keyBasis") {
-      setKeyBasis(keyBasis + 1);
-    } else if (stateSelection === "startingNote") {
-      if (
-        allowedStartingNotes.indexOf(startingNote) ===
-        allowedStartingNotes.length - 1
-      ) {
-        setStartingNote(
-          allowedStartingNotes[allowedStartingNotes.indexOf(startingNote) + 1]
-        );
-      }
-      setStartingNote(
-        allowedStartingNotes[allowedStartingNotes.indexOf(startingNote) + 1]
-      );
-    }
+  const handleKeyBasisIncrease = () => {
+    setKeyBasis(keyBasis + 1);
+  };
 
-    if (stateSelection === "octave") {
+  const handleKeyBasisDecrease = () => {
+    if (keyBasis !== 1) {
+      setKeyBasis(keyBasis - 1);
     }
   };
 
-  const handleDecrease = (stateSelection: string) => {
-    //keyBasis
-    if (stateSelection === "keyBasis") {
-      if (keyBasis !== 1) {
-        setKeyBasis(keyBasis - 1);
-      }
-    }
-    //startingNote
-    else if (stateSelection === "startingNote") {
-      if (startingNote === "c") {
-        setStartingNote(allowedStartingNotes[allowedStartingNotes.length - 1]);
-      }
-
-      setStartingNote(
-        allowedStartingNotes[allowedStartingNotes.indexOf(startingNote) - 1]
-      );
-    }
-
-    //Octave
-    else if (stateSelection === "octave") {
-      if (octave > 1) {
-        setOctave(octave - 1);
-      }
+  const handleStartingNoteIncrease = () => {
+    if (startingNote === "b") {
+      setStartingNote(allowedStartingNotes[0]);
+    } else {
+      let indexOfStartingNote = allowedStartingNotes.indexOf(startingNote);
+      setStartingNote(allowedStartingNotes[indexOfStartingNote + 1]);
     }
   };
 
-  const handleKeyBasis = (event: Event): void => {
-    event.preventDefault();
-    const target = event.currentTarget as HTMLInputElement;
-    const value = target.value;
+  const handleStartingNoteDecrease = () => {
+    if (startingNote === "c") {
+      setStartingNote("b");
+    } else {
+      let indexOfStartingNote = allowedStartingNotes.indexOf(startingNote);
+      setStartingNote(allowedStartingNotes[indexOfStartingNote - 1]);
+    }
+  };
 
-    try {
-      let newKeyBasis = Number(value);
-      setKeyBasis(newKeyBasis);
-    } catch (err) {
-      console.log(err);
+  const handleOctaveIncrease = () => {
+    setOctave(octave + 1);
+  };
+
+  const handleOctaveDecrease = () => {
+    if (octave !== 0) {
+      setOctave(octave - 1);
     }
   };
 
@@ -77,39 +55,39 @@ function App() {
           <img
             src={leftArrow}
             alt="arrow left"
-            onClick={() => handleDecrease("keyBasis")}
+            onClick={handleKeyBasisDecrease}
           />
           <span>Number of Keys: {keyBasis}</span>
           <img
             src={rightArrow}
             alt="arrow right"
-            onClick={() => handleIncrease("keyBasis")}
+            onClick={handleKeyBasisIncrease}
           />
         </div>
         <div className="keyboard-startingnote-input">
           <img
             src={leftArrow}
             alt="arrow left"
-            onClick={() => handleDecrease("startingNote")}
+            onClick={handleStartingNoteDecrease}
           />
           <span>Starting Note: {startingNote}</span>
           <img
             src={rightArrow}
             alt="arrow right"
-            onClick={() => handleIncrease("startingNote")}
+            onClick={handleStartingNoteIncrease}
           />
         </div>
         <div className="keyboard-octave-input">
           <img
             src={leftArrow}
             alt="arrow left"
-            onClick={() => handleDecrease("octave")}
+            onClick={handleOctaveDecrease}
           />
           <span>Starting Octave: {octave}</span>
           <img
             src={rightArrow}
             alt="arrow right"
-            onClick={() => handleIncrease("octave")}
+            onClick={handleOctaveIncrease}
           />
         </div>
       </section>

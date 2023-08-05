@@ -19,8 +19,8 @@
   flex-direction: column;
   margin: 0 auto;
   align-items: flex-start;
-  --keyboard-min-height: 200px;
-  --keyboard-preferred-height: 600px;
+  --keyboard-min-height: 320px;
+  --keyboard-preferred-height: 500px;
   --keyboard-max-height: 700px;
 }
 
@@ -202,20 +202,33 @@
   background-color: grey;
 }
 
-@media (max-width: 680px) {
+@media (orientation: portrait) {
+  .keyboard-controls-wrapper {
+    display: none;
+  }
+
   .keyboardContainer {
-    flex-direction: column-reverse;
+    flex-direction: column;
+    position: relative;
   }
 
   .whiteKeyContainer {
-    flex-direction: column;
-    width: 100%;
+    flex-direction: column-reverse;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .blackKey {
+    width: 50vw;
+    height: 0;
   }
 
   .blackKeyContainer {
-    flex-direction: column;
+    flex-direction: column-reverse;
     height: 100%;
-    width: 50vw;
-    left: 50%;
+    width: 0;
   }
+}
+
+@media (orientation: landscape) {
 }
